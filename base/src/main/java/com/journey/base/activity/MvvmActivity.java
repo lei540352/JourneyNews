@@ -16,7 +16,7 @@ import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
 
-//基类
+//Activity的基类
 // mvvm  v--vm -- m  view -->viewmodel-->model
 public abstract class MvvmActivity <V extends ViewDataBinding,VM extends MvvmBaseViewModel> extends AppCompatActivity implements IBaseView{
 
@@ -60,7 +60,6 @@ public abstract class MvvmActivity <V extends ViewDataBinding,VM extends MvvmBas
         if (getBindingVariable() > 0){
            viewDataBinding.setVariable(getBindingVariable(),viewDataBinding);
         }
-
         viewDataBinding.executePendingBindings();
     }
 

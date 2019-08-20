@@ -1,28 +1,26 @@
 package com.journey.news;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-
+import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.journey.base.activity.MvvmActivity;
 import com.journey.base.viewmodel.MvvmBaseViewModel;
+import com.journey.news.databinding.ActivityMain2Binding;
 import com.journey.news.databinding.ActivityMainBinding;
-import com.journey.news.homefragment.HomeFragment;
 import com.journey.news.otherfragments.AccountFragment;
 import com.journey.news.otherfragments.CategoryFragment;
 import com.journey.news.otherfragments.ServiceFragment;
@@ -31,15 +29,18 @@ import java.lang.reflect.Field;
 
 import q.rorbin.badgeview.QBadgeView;
 
-public class MainActivity extends MvvmActivity<ActivityMainBinding, MvvmBaseViewModel> {
+/**
+ *  继承基类，实现抽象方法
+ */
+public class MainActivity extends MvvmActivity<ActivityMain2Binding, MvvmBaseViewModel> {
 
-    private HomeFragment mHomeFragment = new HomeFragment();
+    private Fragment mHomeFragment;
     private CategoryFragment mCategoryFragment = new CategoryFragment();
     private ServiceFragment mServiceFragment = new ServiceFragment();
     private AccountFragment mAccountFragment = new AccountFragment();
     @Override
     public int getLayoutId(){
-        return R.layout.activity_main;
+        return R.layout.activity_main2;
     }
 
     @Override
@@ -55,6 +56,11 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding, MvvmBaseView
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //根据CC获取到fragment 组件化
+        CCResult result = CC.obtainBuilder("News").setActionName("getHeadlineNewsFragment").build().call();
+        mHomeFragment = (Fragment) result.getDataMap().get("fragment");
+        fromFragment = mHomeFragment;
+
         //Set Toolbar
         setSupportActionBar(viewDataBinding.toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -99,7 +105,7 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding, MvvmBaseView
         showBadgeView(3,1);
     }
 
-    Fragment fromFragment = mHomeFragment;
+    Fragment fromFragment ;
     //切换页面
     private void switchFragment(Fragment from, Fragment to) {
         if (from != to) {

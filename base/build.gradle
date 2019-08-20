@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion Integer.parseInt(project.compileSdkVersion)
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion Integer.parseInt(project.minSdkVersion)
-        targetSdkVersion Integer.parseInt(project.targetSdkVersion)
-        versionCode Integer.parseInt(project.versionCode)
-        versionName project.versionName
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -27,10 +27,15 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$project.androidXVersion"
+    //api 只要引用的组件都可以使用，相当于public
+    //implementation 只有自己能用 相当于  private
+    implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     api 'com.kingja.loadsir:loadsir:1.3.6'//空状态 错误状态
-    implementation 'com.airbnb.android:lottie:2.8.0'
+    implementation 'com.airbnb.android:lottie:2.8.0'//动画库
+    api 'com.google.code.gson:gson:2.8.2'
+    //引入rxjava
+    api 'io.reactivex.rxjava2:rxjava:2.1.16'
 }

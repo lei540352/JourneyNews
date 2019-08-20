@@ -1,4 +1,4 @@
-package com.journey.news.homefragment;
+package com.journey.news.headlinenews;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,20 +10,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.journey.news.R;
-import com.journey.news.databinding.FragmentOthersBinding;
+import com.journey.news.databinding.FragmentHeadlineNewsBinding;
 
-/**
- * Created by Vishal Patolia on 18-Feb-18.
- */
-public class HomeFragment extends Fragment {
-    FragmentOthersBinding mBinding;
+public class HeadlineNewsFragment extends Fragment {
+    FragmentHeadlineNewsBinding mBinding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_others, container, false);
-        mBinding.homeTxtTitle.setText(getString(R.string.menu_home));
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_headline_news, container, false);
         return mBinding.getRoot();
     }
 }

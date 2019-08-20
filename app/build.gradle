@@ -1,15 +1,16 @@
-apply plugin: 'com.android.application'
+ext.mainApp = true //标记为主APP model
+apply from: rootProject.file('cc-settings-2.gradle')
 
 android {
-    compileSdkVersion Integer.parseInt(project.compileSdkVersion)
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         applicationId "com.journey.news"
-        minSdkVersion Integer.parseInt(project.minSdkVersion)
-        targetSdkVersion Integer.parseInt(project.targetSdkVersion)
-        versionCode Integer.parseInt(project.versionCode)
-        versionName project.versionName
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,9 +28,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$project.androidXVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$project.constraintlayoutVersion"
-    implementation project(":base")
-    implementation "com.google.android.material:material:$project.androidXVersion"
-    implementation "q.rorbin:badgeview:$project.androidXVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
+    implementation project(":network")
+    implementation "com.google.android.material:material:$rootProject.androidXVersion"
+    implementation "q.rorbin:badgeview:$rootProject.androidXVersion"
+    addComponent 'news'//会默认添加依赖 ：project（":news"）
 }
