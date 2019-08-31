@@ -9,5 +9,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
-
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@mipmap/theme_background</item>
+    </style>
 </resources>

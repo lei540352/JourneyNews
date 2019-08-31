@@ -29,7 +29,7 @@ android {
 dependencies {
     //api 只要引用的组件都可以使用，相当于public
     //implementation 只有自己能用 相当于  private
-    implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
+    api "androidx.appcompat:appcompat:$rootProject.androidXVersion"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -38,4 +38,5 @@ dependencies {
     api 'com.google.code.gson:gson:2.8.2'
     //引入rxjava
     api 'io.reactivex.rxjava2:rxjava:2.1.16'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

@@ -18,9 +18,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.journey.base.activity.MvvmActivity;
+import com.journey.base.utils.Logger;
 import com.journey.base.viewmodel.MvvmBaseViewModel;
-import com.journey.news.databinding.ActivityMain2Binding;
-import com.journey.news.databinding.ActivityMainBinding;
+import com.journey.news.databinding.ActivityPrimaryBinding;
 import com.journey.news.otherfragments.AccountFragment;
 import com.journey.news.otherfragments.CategoryFragment;
 import com.journey.news.otherfragments.ServiceFragment;
@@ -32,7 +32,7 @@ import q.rorbin.badgeview.QBadgeView;
 /**
  *  继承基类，实现抽象方法
  */
-public class MainActivity extends MvvmActivity<ActivityMain2Binding, MvvmBaseViewModel> {
+public class MainActivity extends MvvmActivity<ActivityPrimaryBinding,MvvmBaseViewModel> {
 
     private Fragment mHomeFragment;
     private CategoryFragment mCategoryFragment = new CategoryFragment();
@@ -40,7 +40,7 @@ public class MainActivity extends MvvmActivity<ActivityMain2Binding, MvvmBaseVie
     private AccountFragment mAccountFragment = new AccountFragment();
     @Override
     public int getLayoutId(){
-        return R.layout.activity_main2;
+        return R.layout.activity_primary;
     }
 
     @Override
@@ -53,9 +53,11 @@ public class MainActivity extends MvvmActivity<ActivityMain2Binding, MvvmBaseVie
         return 0;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.i("MainActivity"," 输出内容 一 11111");
         //根据CC获取到fragment 组件化
         CCResult result = CC.obtainBuilder("News").setActionName("getHeadlineNewsFragment").build().call();
         mHomeFragment = (Fragment) result.getDataMap().get("fragment");

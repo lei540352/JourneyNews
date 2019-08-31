@@ -34,4 +34,5 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.androidXVersion"
     implementation "q.rorbin:badgeview:$rootProject.androidXVersion"
     addComponent 'news'//会默认添加依赖 ：project（":news"）
+    addComponent 'usercenter'
 }

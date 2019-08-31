@@ -5,21 +5,98 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
+import com.journey.base.fragment.MvvmFragment;
 import com.journey.news.R;
 import com.journey.news.databinding.FragmentHeadlineNewsBinding;
+import com.journey.news.databinding.FragmentHomeBinding;
 
-public class HeadlineNewsFragment extends Fragment {
-    FragmentHeadlineNewsBinding mBinding;
+import java.util.ArrayList;
 
-    @Nullable
+/**
+ * 头条新闻导航
+ */
+public class HeadlineNewsFragment extends MvvmFragment<FragmentHomeBinding,HeadlineNewsViewModel> implements HeadlineNewsViewModel.IMainView {
+
+    HeadlineNewsFragmentAdapter mAdapter;
+
+    /**
+     * 创建好view后viewmodel刷新数据
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.refresh();
+        viewDataBinding.tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        initChannels();
+    }
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_headline_news, container, false);
-        return mBinding.getRoot();
+    @Override
+    public int getBindingVariable() {
+        return 0;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    public HeadlineNewsViewModel getViewModel() {
+        return new HeadlineNewsViewModel();
+    }
+
+    @Override
+    protected void onRetryBtnClick() {
+
+    }
+
+    @Override
+    protected String getFragmentTag() {
+        return "HeadlineNewsFragment";
+    }
+
+    /**
+     * 初始化布局
+     */
+    public void initChannels() {
+        mAdapter = new HeadlineNewsFragmentAdapter(getChildFragmentManager());
+        viewDataBinding.viewpager.setAdapter(mAdapter);
+        viewDataBinding.viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(viewDataBinding.tablayout));
+        viewDataBinding.viewpager.setOffscreenPageLimit(1);
+        //绑定tab点击事件
+        viewDataBinding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewDataBinding.viewpager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onChannelsLoaded(ArrayList<ChannelsModel.Channel> channels) {
+        mAdapter.setChannels(channels);
+        viewDataBinding.tablayout.removeAllTabs();
+        for (ChannelsModel.Channel channel : channels) {
+            viewDataBinding.tablayout.addTab(viewDataBinding.tablayout.newTab().setText(channel.channelName));
+        }
+        viewDataBinding.tablayout.scrollTo(0, 0);
     }
 }

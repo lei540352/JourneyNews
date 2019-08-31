@@ -5,6 +5,7 @@ import com.billy.cc.core.component.CCResult;
 import com.billy.cc.core.component.IComponent;
 import com.journey.news.headlinenews.HeadlineNewsFragment;
 
+//cc组件 注册新闻头条页面
 public class NewsComponent implements IComponent {
 
     @Override

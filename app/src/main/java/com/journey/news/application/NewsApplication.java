@@ -7,6 +7,8 @@ import com.journey.base.loadsir.EmptyCallback;
 import com.journey.base.loadsir.ErrorCallback;
 import com.journey.base.loadsir.LoadingCallback;
 import com.journey.base.loadsir.TimeoutCallback;
+import com.journey.base.preference.PreferencesUtil;
+import com.journey.base.utils.Logger;
 import com.journey.network.ApiBase;
 import com.journey.news.BuildConfig;
 import com.kingja.loadsir.core.LoadSir;
@@ -17,7 +19,10 @@ public class NewsApplication extends BaseApplication {
     public void onCreate(){
         super.onCreate();
         setDebug(BuildConfig.DEBUG);
+        //打印输出日志
+        Logger.setEnabled(true);
 
+        PreferencesUtil.init(this);
         //初始化网络层
         //会将请求头的参数带入到网络拦截器当中
         ApiBase.setNetworkRequestInfo(new NetworkRequestInfo());

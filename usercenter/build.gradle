@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply from: rootProject.file('cc-settings-2.gradle')
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -26,9 +26,10 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+dependencies {
+    implementation "com.google.android.material:material:$rootProject.androidXVersion"
+    implementation project(":common")
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

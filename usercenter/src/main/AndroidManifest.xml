@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.journey.usercenter" />
+    package="com.journey.usercenter">
+
+    <application>
+        <activity android:name="com.journey.usercenter.LoginActivity" />
+    </application>
+</manifest>

@@ -1,1 +1,1 @@
-include ':app', ':base', ':news', ':usercenter', ':network'
+include ':app', ':base', ':news', ':usercenter', ':network', ':common', ':xiangxuewebview'
