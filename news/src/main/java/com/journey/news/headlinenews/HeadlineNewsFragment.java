@@ -1,19 +1,13 @@
 package com.journey.news.headlinenews;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 import com.journey.base.fragment.MvvmFragment;
 import com.journey.news.R;
-import com.journey.news.databinding.FragmentHeadlineNewsBinding;
 import com.journey.news.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;

@@ -17,6 +17,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public BaseObserver(SuperBaseModel baseModel) {
         this.baseModel = baseModel;
     }
+
+
     @Override
     public void onError(Throwable e) {
         Log.e("lvr", e.getMessage());

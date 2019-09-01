@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.journey.base.customview.BaseCustomViewModel;
 import com.journey.base.fragment.MvvmFragment;
-import com.journey.base.viewmodel.MvvmBaseViewModel;
 import com.journey.news.R;
 import com.journey.news.databinding.NewsFragmentBinding;
 import com.scwang.smartrefresh.header.WaterDropHeader;

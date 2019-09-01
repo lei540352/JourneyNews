@@ -1,8 +1,15 @@
 package com.journey.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.journey.network.errorhandler.AppDataErrorHandler;
 import com.journey.network.errorhandler.HttpErrorHandler;
+import com.journey.network.gsonconverterfactory.DoubleDefaultAdapter;
+import com.journey.network.gsonconverterfactory.GsonConverterFactory;
+import com.journey.network.gsonconverterfactory.IntegerDefaultAdapter;
+import com.journey.network.gsonconverterfactory.LongDefaultAdapter;
+import com.journey.network.gsonconverterfactory.StringNullAdapter;
 import com.journey.network.interceptor.RequestInterceptor;
 import com.journey.network.interceptor.ResponseInterceptor;
 
@@ -16,7 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 网络链接一般有多个域名，再次里面可以做些配置
@@ -29,14 +35,38 @@ public abstract class ApiBase {
     private static ErrorTransformer sErrorTransformer = new ErrorTransformer();
     private static RequestInterceptor sHttpsRequestInterceptor;
     private static ResponseInterceptor sHttpsResponseInterceptor;
+    private static Gson gson;
+    /**
+     * 增加后台返回""和"null"的处理
+     * 1.int=>0
+     * 2.double=>0.00
+     * 3.long=>0L
+     *
+     * @return
+     */
+    public static Gson buildGson() {
+        if (gson == null) {
+            gson = new GsonBuilder()
+                    .registerTypeAdapter(Integer.class, new IntegerDefaultAdapter())
+                    .registerTypeAdapter(int.class, new IntegerDefaultAdapter())
+                    .registerTypeAdapter(Double.class, new DoubleDefaultAdapter())
+                    .registerTypeAdapter(double.class, new DoubleDefaultAdapter())
+                    .registerTypeAdapter(Long.class, new LongDefaultAdapter())
+                    .registerTypeAdapter(long.class, new LongDefaultAdapter())
+                    .registerTypeAdapter(String.class, new StringNullAdapter())
+                    .create();
+        }
+        return gson;
+    }
 
     protected ApiBase(String baseUrl) {
         retrofit = new Retrofit
                 .Builder()
                 .client(getOkHttpClient())
                 .baseUrl(baseUrl)
+                //支持RxJava2
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .addConverterFactory(GsonConverterFactory.create(buildGson())).build();//添加json转换框架buildGson()可加可不加
     }
 
     public static void setNetworkRequestInfo(INetworkRequestInfo requestInfo) {

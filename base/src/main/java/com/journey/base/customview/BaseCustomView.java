@@ -83,7 +83,7 @@ public abstract class BaseCustomView<T extends ViewDataBinding, S extends BaseCu
     public void onClick(View v) {
     }
 
-    protected T getDataBinding(){
+    public T getDataBinding(){
         return dataBinding;
     }
 

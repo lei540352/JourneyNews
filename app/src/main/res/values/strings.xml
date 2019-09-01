@@ -2,7 +2,7 @@
     <string name="app_name">JourneyNews</string>
     <string name="network_request_failed">网络请求失败</string>
     <string name="menu_home">头条</string>
-    <string name="menu_categories">地区</string>
+    <string name="menu_categories">投客</string>
     <string name="menu_services">服务</string>
     <string name="menu_account">我的</string>
     <string name="login">登录</string>

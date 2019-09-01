@@ -32,7 +32,6 @@ public class RequestInterceptor implements Interceptor {
                 }
             }
         }
-
         return chain.proceed(builder.build());
     }
 }

@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.journey.base.activity.MvvmActivity;
 import com.journey.base.utils.Logger;
 import com.journey.base.viewmodel.MvvmBaseViewModel;
+import com.journey.news.databinding.ActivityMainBinding;
 import com.journey.news.databinding.ActivityPrimaryBinding;
 import com.journey.news.otherfragments.AccountFragment;
 import com.journey.news.otherfragments.CategoryFragment;
@@ -32,15 +33,15 @@ import q.rorbin.badgeview.QBadgeView;
 /**
  *  继承基类，实现抽象方法
  */
-public class MainActivity extends MvvmActivity<ActivityPrimaryBinding,MvvmBaseViewModel> {
+public class MainActivity extends MvvmActivity<ActivityMainBinding,MvvmBaseViewModel> {
 
     private Fragment mHomeFragment;
-    private CategoryFragment mCategoryFragment = new CategoryFragment();
+    private Fragment mVoteFragment;
     private ServiceFragment mServiceFragment = new ServiceFragment();
     private AccountFragment mAccountFragment = new AccountFragment();
     @Override
     public int getLayoutId(){
-        return R.layout.activity_primary;
+        return R.layout.activity_main;
     }
 
     @Override
@@ -63,6 +64,10 @@ public class MainActivity extends MvvmActivity<ActivityPrimaryBinding,MvvmBaseVi
         mHomeFragment = (Fragment) result.getDataMap().get("fragment");
         fromFragment = mHomeFragment;
 
+        //投票页面
+        CCResult result2 = CC.obtainBuilder("Vote").setActionName("getVoteFragment").build().call();
+        mVoteFragment = (Fragment) result2.getDataMap().get("fragment");
+
         //Set Toolbar
         setSupportActionBar(viewDataBinding.toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -81,8 +86,8 @@ public class MainActivity extends MvvmActivity<ActivityPrimaryBinding,MvvmBaseVi
                     case R.id.menu_home:
                         fragment = mHomeFragment;
                         break;
-                    case R.id.menu_categories:
-                        fragment = mCategoryFragment;
+                    case R.id.menu_vote:
+                        fragment = mVoteFragment;
                         break;
                     case R.id.menu_services:
                         fragment = mServiceFragment;
