@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.journey.common.widget.GlideCircleTransform;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -22,6 +23,7 @@ public class CommonBindingAdapters {
         if(!TextUtils.isEmpty(url)) {
             Glide.with(view.getContext())
                     .load(url)
+                    .transform(new GlideCircleTransform())
                     .transition(withCrossFade())
                     .into(view);
         }

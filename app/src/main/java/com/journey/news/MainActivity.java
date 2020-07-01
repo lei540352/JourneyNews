@@ -19,7 +19,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.journey.base.activity.MvvmActivity;
 import com.journey.base.utils.Logger;
+import com.journey.base.utils.MeasureUtil;
 import com.journey.base.viewmodel.MvvmBaseViewModel;
+import com.journey.base.widget.UserGuideView;
 import com.journey.news.databinding.ActivityMainBinding;
 import com.journey.news.databinding.ActivityPrimaryBinding;
 import com.journey.news.otherfragments.AccountFragment;
@@ -27,6 +29,7 @@ import com.journey.news.otherfragments.CategoryFragment;
 import com.journey.news.otherfragments.ServiceFragment;
 
 import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
 
 import q.rorbin.badgeview.QBadgeView;
 
@@ -39,6 +42,8 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding,MvvmBaseViewM
     private Fragment mVoteFragment;
     private ServiceFragment mServiceFragment = new ServiceFragment();
     private AccountFragment mAccountFragment = new AccountFragment();
+
+    private UserGuideView guideView;
     @Override
     public int getLayoutId(){
         return R.layout.activity_main;
@@ -59,6 +64,10 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding,MvvmBaseViewM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Logger.i("MainActivity"," 输出内容 一 11111");
+
+        viewDataBinding.guideView.setTouchOutsideDismiss(false);
+        viewDataBinding.guideView.setStatusBarHeight(MeasureUtil.getStatuBarHeight(this));
+
         //根据CC获取到fragment 组件化
         CCResult result = CC.obtainBuilder("News").setActionName("getHeadlineNewsFragment").build().call();
         mHomeFragment = (Fragment) result.getDataMap().get("fragment");
@@ -110,6 +119,28 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding,MvvmBaseViewM
         transaction.replace(viewDataBinding.container.getId(),mHomeFragment);
         transaction.commit();
         showBadgeView(3,1);
+
+        LinkedHashMap<View, Integer> targets = new LinkedHashMap<>();
+//        targets.put(top, R.mipmap.panda);
+//        targets.put(topLeft, R.mipmap.tip3);
+//        targets.put(topRight, R.mipmap.tip3);
+        targets.put(viewDataBinding.bottomView.getChildAt(0), R.mipmap.tip2);
+        targets.put(viewDataBinding.bottomView.getChildAt(1), R.mipmap.tip3);
+        targets.put(viewDataBinding.bottomView.getChildAt(2), R.mipmap.tip_view);
+//        viewDataBinding.guideView.setHighLightView(top,icon,back);
+        viewDataBinding.guideView.setArrowDownRight(R.mipmap.guide_arrow_right);
+        viewDataBinding.guideView.setArrowDownCenter(R.mipmap.guide_arrow_left);
+        viewDataBinding.guideView.setArrowDownLeft(R.mipmap.guide_arrow_left);
+        viewDataBinding.guideView.setArrowUpLeftMoveX(-30);
+        viewDataBinding.guideView.setArrowDownRightMoveX(0);
+        viewDataBinding.guideView.setTipViewMoveX(viewDataBinding.bottomView.getChildAt(0),-60);
+//        viewDataBinding.guideView.setTipViewMoveX(bottomRight,140);
+        viewDataBinding.guideView.setTipViewMoveX(viewDataBinding.bottomView.getChildAt(2),-50);
+        viewDataBinding.guideView.setArrowDownLeftMoveX(-20);
+//        viewDataBinding.guideView.setArrowDownCenterMoveX(100);
+//        viewDataBinding.guideView.setTipViewMoveX(icon,-100);
+//        viewDataBinding.guideView.setTipViewMoveY(icon,100);
+        viewDataBinding.guideView.setHighLightView(targets);
     }
 
     Fragment fromFragment ;

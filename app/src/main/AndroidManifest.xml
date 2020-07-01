@@ -29,6 +29,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".TantanActivity"></activity>
+        <activity android:name=".TabbarActivity"></activity>
+        <activity android:name=".upimg.MainActivity111"></activity>
     </application>
 
 </manifest>

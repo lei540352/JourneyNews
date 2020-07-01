@@ -28,7 +28,7 @@ public class ServiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.activity_self_drawable, container, false);
 
-        mTaskClearDrawable = new TaskClearDrawable(getContext(), Utils.dp2px(400), Utils.dp2px(400));
+        mTaskClearDrawable = new TaskClearDrawable(getContext(), 700, 700);
         mBinding.imageView.setImageDrawable(mTaskClearDrawable);
 
         mBinding.imageView.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class ServiceFragment extends Fragment {
 
                 Log.i("Zero", "mTaskClearDrawable = " + mTaskClearDrawable.isRunning() );
                 if(false == mTaskClearDrawable.isRunning()){
-//                    mTaskClearDrawable.start();
+                    mTaskClearDrawable.start();
                 }
             }
         });

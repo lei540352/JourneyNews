@@ -9,7 +9,9 @@
 
 package com.journey.base.utils;
 
+import android.content.res.Resources;
 import android.util.SparseArray;
+import android.util.TypedValue;
 
 import java.util.Collection;
 import java.util.Map;
@@ -78,4 +80,9 @@ public class Utils {
     public static boolean isEmpty(int[] si) {
         return si == null || si.length == 0;
     }
+
+    public static int dp2px(int dp){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp, Resources.getSystem().getDisplayMetrics());
+    }
+
 }

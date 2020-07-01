@@ -30,8 +30,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$rootProject.androidXVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
-    implementation project(":network")
     implementation "com.google.android.material:material:$rootProject.androidXVersion"
+    implementation project(":network")
     implementation "q.rorbin:badgeview:$rootProject.androidXVersion"
     addComponent 'news'//会默认添加依赖 ：project（":news"）
     addComponent 'usercenter'

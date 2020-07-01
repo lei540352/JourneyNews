@@ -6,6 +6,8 @@
             name="viewModel"
             type="com.journey.library_vote.baen.VoteItemResultProtocol" />
 
+        <!--引入工具类  alias 类似new 对象 -->
+        <import type="com.journey.base.utils.Utils" alias="baseUtils"/>
         <import type="android.view.View" />
         <import type="android.text.TextUtils" />
         <import type="androidx.databinding.ObservableField" />
@@ -88,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@{viewModel.replynums}"
+                android:text="@{String.valueOf(viewModel.replynums)}"
                 android:textColor="@color/color_9"
                 android:textSize="@dimen/textsize12" />
 
@@ -97,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@{viewModel.points}"
+                android:text="@{String.valueOf(viewModel.points)}"
                 android:textColor="@color/color_9"
                 android:textSize="@dimen/textsize12" />
         </LinearLayout>

@@ -26,6 +26,14 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <com.journey.base.widget.UserGuideView
+                android:id="@+id/guideView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:HighlightViewStyle="circle"
+                app:MaskBlurStyle="solid"
+                app:maskColor="#b7000000"
+                app:tipView="@mipmap/tip_view" />
         </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

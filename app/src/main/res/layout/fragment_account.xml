@@ -13,5 +13,29 @@
             android:layout_centerVertical="true"
             android:text="Login"
             android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/reveive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="列表"
+            android:textSize="18dp" />
+        <Button
+            android:id="@+id/tabbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tabbar 动画"
+            android:textAllCaps="false"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/tantan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="探探左滑喜欢右滑不喜欢特效"
+            android:textSize="18dp"
+            android:layout_marginTop="60dp"/>
     </RelativeLayout>
 </layout>
